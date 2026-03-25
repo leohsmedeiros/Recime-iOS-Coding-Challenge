@@ -17,3 +17,19 @@ struct Recipe: Identifiable, Codable, Hashable {
     let instructions: [String]
     let dietaryAttributes: [DietaryAttribute]
 }
+
+extension Recipe {
+    static let mock = Recipe(
+        id: UUID(),
+        title: "Vegetarian Pasta",
+        description: "A quick and flavorful pasta with tomatoes and basil.",
+        servings: 2,
+        ingredients: ["Pasta", "Tomato", "Basil", "Garlic"],
+        instructions: [
+            "Boil pasta.",
+            "Cook sauce.",
+            "Combine and serve."
+        ],
+        dietaryAttributes: [.vegetarian]
+    )
+}

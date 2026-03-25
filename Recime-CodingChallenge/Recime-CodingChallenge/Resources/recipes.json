@@ -1,6 +1,6 @@
 [
   {
-    "id": "B7D7A0E9-3E0B-4CB4-BE5A-8F2E5446C501",
+    "id": "1E2D3C4B-0001-4A1B-8F00-000000000001",
     "title": "Vegetarian Pasta",
     "description": "A quick and flavorful pasta with tomatoes and basil.",
     "servings": 2,
@@ -12,5 +12,129 @@
       "Mix pasta with sauce and top with basil."
     ],
     "dietaryAttributes": ["vegetarian"]
+  },
+  {
+    "id": "1E2D3C4B-0002-4A1B-8F00-000000000002",
+    "title": "Grilled Chicken Salad",
+    "description": "A healthy salad with grilled chicken and fresh greens.",
+    "servings": 2,
+    "ingredients": ["chicken breast", "lettuce", "tomato", "cucumber", "olive oil"],
+    "instructions": [
+      "Season and grill the chicken.",
+      "Chop vegetables and mix in a bowl.",
+      "Slice chicken and place on top.",
+      "Drizzle with olive oil and serve."
+    ],
+    "dietaryAttributes": []
+  },
+  {
+    "id": "1E2D3C4B-0003-4A1B-8F00-000000000003",
+    "title": "Vegan Buddha Bowl",
+    "description": "A nourishing bowl with quinoa and roasted vegetables.",
+    "servings": 3,
+    "ingredients": ["quinoa", "sweet potato", "chickpeas", "spinach", "olive oil"],
+    "instructions": [
+      "Cook quinoa according to package instructions.",
+      "Roast sweet potatoes and chickpeas.",
+      "Assemble bowl with spinach and quinoa.",
+      "Top with roasted vegetables."
+    ],
+    "dietaryAttributes": ["vegetarian", "vegan"]
+  },
+  {
+    "id": "1E2D3C4B-0004-4A1B-8F00-000000000004",
+    "title": "Beef Stir Fry",
+    "description": "A quick stir fry with beef and vegetables.",
+    "servings": 4,
+    "ingredients": ["beef", "broccoli", "soy sauce", "garlic", "carrot"],
+    "instructions": [
+      "Slice beef thinly.",
+      "Stir fry beef in a hot pan.",
+      "Add vegetables and cook until tender.",
+      "Add soy sauce and mix well."
+    ],
+    "dietaryAttributes": []
+  },
+  {
+    "id": "1E2D3C4B-0005-4A1B-8F00-000000000005",
+    "title": "Avocado Toast",
+    "description": "Simple and delicious avocado toast.",
+    "servings": 1,
+    "ingredients": ["bread", "avocado", "salt", "pepper", "lemon"],
+    "instructions": [
+      "Toast the bread.",
+      "Mash avocado with lemon, salt, and pepper.",
+      "Spread on toast and serve."
+    ],
+    "dietaryAttributes": ["vegetarian", "vegan"]
+  },
+  {
+    "id": "1E2D3C4B-0006-4A1B-8F00-000000000006",
+    "title": "Pancakes",
+    "description": "Fluffy pancakes perfect for breakfast.",
+    "servings": 3,
+    "ingredients": ["flour", "milk", "egg", "sugar", "butter"],
+    "instructions": [
+      "Mix dry ingredients.",
+      "Add milk and eggs.",
+      "Cook batter on a hot pan.",
+      "Flip and cook until golden."
+    ],
+    "dietaryAttributes": ["vegetarian"]
+  },
+  {
+    "id": "1E2D3C4B-0007-4A1B-8F00-000000000007",
+    "title": "Chicken Curry",
+    "description": "Rich and spicy chicken curry.",
+    "servings": 4,
+    "ingredients": ["chicken", "curry paste", "coconut milk", "onion", "garlic"],
+    "instructions": [
+      "Saute onion and garlic.",
+      "Add chicken and cook until browned.",
+      "Add curry paste and coconut milk.",
+      "Simmer for 20 minutes."
+    ],
+    "dietaryAttributes": []
+  },
+  {
+    "id": "1E2D3C4B-0008-4A1B-8F00-000000000008",
+    "title": "Fruit Smoothie",
+    "description": "A refreshing fruit smoothie.",
+    "servings": 2,
+    "ingredients": ["banana", "strawberry", "milk", "honey"],
+    "instructions": [
+      "Add all ingredients to blender.",
+      "Blend until smooth.",
+      "Serve chilled."
+    ],
+    "dietaryAttributes": ["vegetarian"]
+  },
+  {
+    "id": "1E2D3C4B-0009-4A1B-8F00-000000000009",
+    "title": "Vegetable Soup",
+    "description": "Warm and comforting vegetable soup.",
+    "servings": 4,
+    "ingredients": ["carrot", "potato", "onion", "celery", "vegetable broth"],
+    "instructions": [
+      "Chop all vegetables.",
+      "Saute onion and celery.",
+      "Add remaining vegetables and broth.",
+      "Simmer until vegetables are tender."
+    ],
+    "dietaryAttributes": ["vegetarian", "vegan", "glutenFree"]
+  },
+  {
+    "id": "1E2D3C4B-0010-4A1B-8F00-000000000010",
+    "title": "Omelette",
+    "description": "Classic omelette with cheese.",
+    "servings": 1,
+    "ingredients": ["egg", "cheese", "salt", "pepper", "butter"],
+    "instructions": [
+      "Beat the eggs.",
+      "Melt butter in a pan.",
+      "Pour eggs and cook.",
+      "Add cheese and fold."
+    ],
+    "dietaryAttributes": ["vegetarian", "glutenFree"]
   }
 ]
