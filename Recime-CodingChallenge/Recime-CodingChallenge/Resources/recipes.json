@@ -1,0 +1,16 @@
+[
+  {
+    "id": "B7D7A0E9-3E0B-4CB4-BE5A-8F2E5446C501",
+    "title": "Vegetarian Pasta",
+    "description": "A quick and flavorful pasta with tomatoes and basil.",
+    "servings": 2,
+    "ingredients": ["pasta", "tomato", "basil", "olive oil", "garlic"],
+    "instructions": [
+      "Boil the pasta until al dente.",
+      "Saute garlic in olive oil.",
+      "Add tomatoes and cook for 5 minutes.",
+      "Mix pasta with sauce and top with basil."
+    ],
+    "dietaryAttributes": ["vegetarian"]
+  }
+]
