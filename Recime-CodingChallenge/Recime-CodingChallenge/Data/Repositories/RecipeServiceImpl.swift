@@ -9,12 +9,18 @@
 import Foundation
 
 final class RecipeServiceImpl: RecipeService {
+    let request: APIRequest
+    
+    init(request: APIRequest = LocalAPIRequest()) {
+        self.request = request
+    }
+    
     func fetchAllRecipes() async throws -> [Recipe] {
-        return try await getRecipes()
+        return try await request.getRecipes()
     }
 
     func searchRecipes(_ recipeSearch: RecipeSearch) async throws -> [Recipe] {
-        let recipes = try await getRecipes()
+        let recipes = try await request.getRecipes()
         return recipes.filter { recipe in
             matchesQuery(recipe, search: recipeSearch)
             && matchesVegetarianOnly(recipe, search: recipeSearch)
@@ -22,20 +28,6 @@ final class RecipeServiceImpl: RecipeService {
             && matchesIncludedIngredients(recipe, search: recipeSearch)
             && matchesExcludedIngredients(recipe, search: recipeSearch)
             && matchesInstructionQuery(recipe, search: recipeSearch)
-        }
-    }
-    
-    private func getRecipes() async throws -> [Recipe] {
-        guard let url = Bundle.main.url(forResource: "recipes", withExtension: "json") else {
-            throw RecipeServiceAPIError.fileNotFound
-        }
-        
-        do {
-            let data = try Data(contentsOf: url)
-            let recipes = try JSONDecoder().decode([Recipe].self, from: data)
-            return recipes
-        } catch {
-            throw RecipeServiceAPIError.decodingFailed(error)
         }
     }
     

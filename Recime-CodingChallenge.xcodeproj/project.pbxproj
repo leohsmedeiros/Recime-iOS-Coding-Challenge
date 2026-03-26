@@ -7,14 +7,7 @@
 	objects = {
 
 /* Begin PBXContainerItemProxy section */
-		94B87A472F7324AD00DE4043 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 94B87A312F7324AA00DE4043 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 94B87A382F7324AB00DE4043;
-			remoteInfo = "Recime-CodingChallenge";
-		};
-		94B87A512F7324AD00DE4043 /* PBXContainerItemProxy */ = {
+		9415265C2F75C85300DBF10A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 94B87A312F7324AA00DE4043 /* Project object */;
 			proxyType = 1;
@@ -24,12 +17,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		941526582F75C85300DBF10A /* Recime-CodingChallengeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Recime-CodingChallengeTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		94B87A392F7324AB00DE4043 /* Recime-CodingChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Recime-CodingChallenge.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		94B87A462F7324AD00DE4043 /* Recime-CodingChallengeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Recime-CodingChallengeTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		94B87A502F7324AD00DE4043 /* Recime-CodingChallengeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Recime-CodingChallengeUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		941526592F75C85300DBF10A /* Recime-CodingChallengeTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "Recime-CodingChallengeTests";
+			sourceTree = "<group>";
+		};
 		94B87A3B2F7324AB00DE4043 /* Recime-CodingChallenge */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = "Recime-CodingChallenge";
@@ -38,21 +35,14 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		941526552F75C85300DBF10A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		94B87A362F7324AB00DE4043 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		94B87A432F7324AD00DE4043 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		94B87A4D2F7324AD00DE4043 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -66,6 +56,7 @@
 			isa = PBXGroup;
 			children = (
 				94B87A3B2F7324AB00DE4043 /* Recime-CodingChallenge */,
+				941526592F75C85300DBF10A /* Recime-CodingChallengeTests */,
 				94B87A3A2F7324AB00DE4043 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -74,8 +65,7 @@
 			isa = PBXGroup;
 			children = (
 				94B87A392F7324AB00DE4043 /* Recime-CodingChallenge.app */,
-				94B87A462F7324AD00DE4043 /* Recime-CodingChallengeTests.xctest */,
-				94B87A502F7324AD00DE4043 /* Recime-CodingChallengeUITests.xctest */,
+				941526582F75C85300DBF10A /* Recime-CodingChallengeTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -83,6 +73,29 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		941526572F75C85300DBF10A /* Recime-CodingChallengeTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9415265E2F75C85300DBF10A /* Build configuration list for PBXNativeTarget "Recime-CodingChallengeTests" */;
+			buildPhases = (
+				941526542F75C85300DBF10A /* Sources */,
+				941526552F75C85300DBF10A /* Frameworks */,
+				941526562F75C85300DBF10A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9415265D2F75C85300DBF10A /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				941526592F75C85300DBF10A /* Recime-CodingChallengeTests */,
+			);
+			name = "Recime-CodingChallengeTests";
+			packageProductDependencies = (
+			);
+			productName = "Recime-CodingChallengeTests";
+			productReference = 941526582F75C85300DBF10A /* Recime-CodingChallengeTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		94B87A382F7324AB00DE4043 /* Recime-CodingChallenge */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 94B87A5A2F7324AD00DE4043 /* Build configuration list for PBXNativeTarget "Recime-CodingChallenge" */;
@@ -105,46 +118,6 @@
 			productReference = 94B87A392F7324AB00DE4043 /* Recime-CodingChallenge.app */;
 			productType = "com.apple.product-type.application";
 		};
-		94B87A452F7324AD00DE4043 /* Recime-CodingChallengeTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 94B87A5D2F7324AD00DE4043 /* Build configuration list for PBXNativeTarget "Recime-CodingChallengeTests" */;
-			buildPhases = (
-				94B87A422F7324AD00DE4043 /* Sources */,
-				94B87A432F7324AD00DE4043 /* Frameworks */,
-				94B87A442F7324AD00DE4043 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				94B87A482F7324AD00DE4043 /* PBXTargetDependency */,
-			);
-			name = "Recime-CodingChallengeTests";
-			packageProductDependencies = (
-			);
-			productName = "Recime-CodingChallengeTests";
-			productReference = 94B87A462F7324AD00DE4043 /* Recime-CodingChallengeTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		94B87A4F2F7324AD00DE4043 /* Recime-CodingChallengeUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 94B87A602F7324AD00DE4043 /* Build configuration list for PBXNativeTarget "Recime-CodingChallengeUITests" */;
-			buildPhases = (
-				94B87A4C2F7324AD00DE4043 /* Sources */,
-				94B87A4D2F7324AD00DE4043 /* Frameworks */,
-				94B87A4E2F7324AD00DE4043 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				94B87A522F7324AD00DE4043 /* PBXTargetDependency */,
-			);
-			name = "Recime-CodingChallengeUITests";
-			packageProductDependencies = (
-			);
-			productName = "Recime-CodingChallengeUITests";
-			productReference = 94B87A502F7324AD00DE4043 /* Recime-CodingChallengeUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -152,19 +125,15 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 2630;
+				LastSwiftUpdateCheck = 2640;
 				LastUpgradeCheck = 2640;
 				TargetAttributes = {
+					941526572F75C85300DBF10A = {
+						CreatedOnToolsVersion = 26.4;
+						TestTargetID = 94B87A382F7324AB00DE4043;
+					};
 					94B87A382F7324AB00DE4043 = {
 						CreatedOnToolsVersion = 26.3;
-					};
-					94B87A452F7324AD00DE4043 = {
-						CreatedOnToolsVersion = 26.3;
-						TestTargetID = 94B87A382F7324AB00DE4043;
-					};
-					94B87A4F2F7324AD00DE4043 = {
-						CreatedOnToolsVersion = 26.3;
-						TestTargetID = 94B87A382F7324AB00DE4043;
 					};
 				};
 			};
@@ -183,28 +152,20 @@
 			projectRoot = "";
 			targets = (
 				94B87A382F7324AB00DE4043 /* Recime-CodingChallenge */,
-				94B87A452F7324AD00DE4043 /* Recime-CodingChallengeTests */,
-				94B87A4F2F7324AD00DE4043 /* Recime-CodingChallengeUITests */,
+				941526572F75C85300DBF10A /* Recime-CodingChallengeTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		941526562F75C85300DBF10A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		94B87A372F7324AB00DE4043 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		94B87A442F7324AD00DE4043 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		94B87A4E2F7324AD00DE4043 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -214,21 +175,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		941526542F75C85300DBF10A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		94B87A352F7324AB00DE4043 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		94B87A422F7324AD00DE4043 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		94B87A4C2F7324AD00DE4043 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -238,19 +192,58 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		94B87A482F7324AD00DE4043 /* PBXTargetDependency */ = {
+		9415265D2F75C85300DBF10A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 94B87A382F7324AB00DE4043 /* Recime-CodingChallenge */;
-			targetProxy = 94B87A472F7324AD00DE4043 /* PBXContainerItemProxy */;
-		};
-		94B87A522F7324AD00DE4043 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 94B87A382F7324AB00DE4043 /* Recime-CodingChallenge */;
-			targetProxy = 94B87A512F7324AD00DE4043 /* PBXContainerItemProxy */;
+			targetProxy = 9415265C2F75C85300DBF10A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		9415265F2F75C85300DBF10A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7Y3U7L4DFL;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.leohsmedeiros.Recime-CodingChallengeTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Recime-CodingChallenge.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Recime-CodingChallenge";
+			};
+			name = Debug;
+		};
+		941526602F75C85300DBF10A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7Y3U7L4DFL;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.leohsmedeiros.Recime-CodingChallengeTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Recime-CodingChallenge.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Recime-CodingChallenge";
+			};
+			name = Release;
+		};
 		94B87A582F7324AD00DE4043 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -438,93 +431,18 @@
 			};
 			name = Release;
 		};
-		94B87A5E2F7324AD00DE4043 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 7Y3U7L4DFL;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.leohsmedeiros.Recime-CodingChallengeTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				STRING_CATALOG_GENERATE_SYMBOLS = NO;
-				SWIFT_APPROACHABLE_CONCURRENCY = YES;
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Recime-CodingChallenge.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Recime-CodingChallenge";
-			};
-			name = Debug;
-		};
-		94B87A5F2F7324AD00DE4043 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 7Y3U7L4DFL;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.leohsmedeiros.Recime-CodingChallengeTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				STRING_CATALOG_GENERATE_SYMBOLS = NO;
-				SWIFT_APPROACHABLE_CONCURRENCY = YES;
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Recime-CodingChallenge.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Recime-CodingChallenge";
-			};
-			name = Release;
-		};
-		94B87A612F7324AD00DE4043 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 7Y3U7L4DFL;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.leohsmedeiros.Recime-CodingChallengeUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				STRING_CATALOG_GENERATE_SYMBOLS = NO;
-				SWIFT_APPROACHABLE_CONCURRENCY = YES;
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "Recime-CodingChallenge";
-			};
-			name = Debug;
-		};
-		94B87A622F7324AD00DE4043 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 7Y3U7L4DFL;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.leohsmedeiros.Recime-CodingChallengeUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				STRING_CATALOG_GENERATE_SYMBOLS = NO;
-				SWIFT_APPROACHABLE_CONCURRENCY = YES;
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "Recime-CodingChallenge";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		9415265E2F75C85300DBF10A /* Build configuration list for PBXNativeTarget "Recime-CodingChallengeTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9415265F2F75C85300DBF10A /* Debug */,
+				941526602F75C85300DBF10A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		94B87A342F7324AA00DE4043 /* Build configuration list for PBXProject "Recime-CodingChallenge" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -539,24 +457,6 @@
 			buildConfigurations = (
 				94B87A5B2F7324AD00DE4043 /* Debug */,
 				94B87A5C2F7324AD00DE4043 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		94B87A5D2F7324AD00DE4043 /* Build configuration list for PBXNativeTarget "Recime-CodingChallengeTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				94B87A5E2F7324AD00DE4043 /* Debug */,
-				94B87A5F2F7324AD00DE4043 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		94B87A602F7324AD00DE4043 /* Build configuration list for PBXNativeTarget "Recime-CodingChallengeUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				94B87A612F7324AD00DE4043 /* Debug */,
-				94B87A622F7324AD00DE4043 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
