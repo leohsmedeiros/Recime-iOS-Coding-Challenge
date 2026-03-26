@@ -12,49 +12,39 @@ struct RecipeFiltersView: View {
     @Binding var filters: RecipeSearchFilters
     @Environment(\.dismiss) private var dismiss
     
+    @State private var vegetarianOnly: Bool = false
     @State private var queryText = ""
     @State private var includedText = ""
     @State private var excludedText = ""
     @State private var servingsText = ""
+    @State private var instructionQuery = ""
     
     var body: some View {
         NavigationStack {
             Form {
                 Section("Query") {
                     TextField("", text: $queryText)
-                        .onChange(of: queryText) { _, newValue in
-                            filters.query = newValue
-                        }
                 }
                 
                 Section("Dietary") {
-                    Toggle("Vegetarian only", isOn: $filters.vegetarianOnly)
+                    Toggle("Vegetarian only", isOn: $vegetarianOnly)
                 }
                 
                 Section("Servings") {
                     TextField("e.g. 2", text: $servingsText)
                         .keyboardType(.numberPad)
-                        .onChange(of: servingsText) { _, newValue in
-                            filters.servings = Int(newValue)
-                        }
                 }
                 
                 Section("Include ingredients") {
                     TextField("e.g. tomato, basil", text: $includedText)
-                        .onChange(of: includedText) { _, newValue in
-                            filters.includedIngredients = parseCSV(newValue)
-                        }
                 }
                 
                 Section("Exclude ingredients") {
                     TextField("e.g. garlic, onion", text: $excludedText)
-                        .onChange(of: excludedText) { _, newValue in
-                            filters.excludedIngredients = parseCSV(newValue)
-                        }
                 }
                 
                 Section("Instruction search") {
-                    TextField("e.g. bake, simmer", text: $filters.instructionQuery)
+                    TextField("e.g. bake, simmer", text: $instructionQuery)
                 }
             }
             .navigationTitle("Filters")
@@ -63,25 +53,38 @@ struct RecipeFiltersView: View {
                     Button("Reset") {
                         filters = RecipeSearchFilters()
                         queryText = ""
+                        vegetarianOnly = false
                         includedText = ""
                         excludedText = ""
                         servingsText = ""
+                        instructionQuery = ""
                     }
                 }
                 
                 ToolbarItem(placement: .topBarTrailing) {
                     Button("Done") {
+                        filters = RecipeSearchFilters(
+                            query: queryText,
+                            vegetarianOnly: vegetarianOnly,
+                            servings: Int(servingsText),
+                            includedIngredients: parseCSV(includedText),
+                            excludedIngredients: parseCSV(excludedText),
+                            instructionQuery: instructionQuery
+                        )
+                        
                         dismiss()
                     }
                 }
             }
             .onAppear {
                 queryText = filters.query
+                vegetarianOnly = filters.vegetarianOnly
                 includedText = filters.includedIngredients.joined(separator: ", ")
                 excludedText = filters.excludedIngredients.joined(separator: ", ")
                 if let servings = filters.servings {
                     servingsText = "\(servings)"
                 }
+                instructionQuery = filters.instructionQuery
             }
         }
     }
