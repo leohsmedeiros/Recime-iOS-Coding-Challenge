@@ -12,7 +12,6 @@ import Combine
 
 final class RecipeListViewModel: ObservableObject {
     @Published private(set) var recipes: [Recipe] = []
-    @Published var filters = RecipeSearchFilters()
     @Published var isLoading = false
     @Published var errorMessage: String?
 
@@ -23,16 +22,31 @@ final class RecipeListViewModel: ObservableObject {
     }
 
     @MainActor
-    func loadRecipes() async {
+    func loadAllRecipes() async {
         isLoading = true
         errorMessage = nil
 
         do {
-            recipes = try await service.fetchRecipes(filters: filters)
+            recipes = try await service.fetchAllRecipes()
         } catch {
             errorMessage = error.localizedDescription
         }
 
         isLoading = false
     }
+    
+    @MainActor
+    func searchRecipes(filters: RecipeSearchFilters) async {
+        isLoading = true
+        errorMessage = nil
+
+        do {
+            recipes = try await service.searchRecipes(filters: filters)
+        } catch {
+            errorMessage = error.localizedDescription
+        }
+
+        isLoading = false
+    }
+
 }

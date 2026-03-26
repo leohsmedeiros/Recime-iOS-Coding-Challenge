@@ -7,5 +7,6 @@
 
 
 protocol RecipeService {
-    func fetchRecipes(filters: RecipeSearchFilters) async throws -> [Recipe]
+    func fetchAllRecipes() async throws -> [Recipe]
+    func searchRecipes(filters: RecipeSearchFilters) async throws -> [Recipe]
 }

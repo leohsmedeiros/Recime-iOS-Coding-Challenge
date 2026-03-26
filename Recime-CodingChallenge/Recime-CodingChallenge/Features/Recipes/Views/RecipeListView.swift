@@ -10,8 +10,9 @@ import SwiftUI
 
 struct RecipeListView: View {
     @StateObject private var viewModel = RecipeListViewModel()
+    @State private var filters = RecipeSearchFilters()
     @State private var showingFilters = false
-    
+
     var body: some View {
         NavigationStack {
             Group {
@@ -39,9 +40,9 @@ struct RecipeListView: View {
                 }
             }
             .navigationTitle("Recipes")
-            .onChange(of: viewModel.filters) { _, _ in
+            .onChange(of: filters) { _, _ in
                 Task {
-                    await viewModel.loadRecipes()
+                    await viewModel.searchRecipes(filters: filters)
                 }
             }
             .toolbar {
@@ -49,18 +50,18 @@ struct RecipeListView: View {
                     Button {
                         showingFilters = true
                     } label: {
-                        Image(systemName: "line.3.horizontal.decrease.circle")
+                        Image(systemName: "magnifyingglass")
                     }
                 }
             }
             .sheet(isPresented: $showingFilters) {
-                RecipeFiltersView(filters: $viewModel.filters)
+                RecipeFiltersView(filters: $filters)
             }
             .navigationDestination(for: Recipe.self) { recipe in
                 RecipeDetailView(recipe: recipe)
             }
             .task {
-                await viewModel.loadRecipes()
+                await viewModel.loadAllRecipes()
             }
         }
     }

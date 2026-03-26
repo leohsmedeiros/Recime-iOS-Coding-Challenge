@@ -9,7 +9,21 @@
 import Foundation
 
 final class RecipeServiceImpl: RecipeService {
-    func fetchRecipes(filters: RecipeSearchFilters) async throws -> [Recipe] {
+    func fetchAllRecipes() async throws -> [Recipe] {
+        guard let url = Bundle.main.url(forResource: "recipes", withExtension: "json") else {
+            throw RecipeServiceAPIError.fileNotFound
+        }
+        
+        do {
+            let data = try Data(contentsOf: url)
+            let recipes = try JSONDecoder().decode([Recipe].self, from: data)
+            return recipes
+        } catch {
+            throw RecipeServiceAPIError.decodingFailed(error)
+        }
+    }
+
+    func searchRecipes(filters: RecipeSearchFilters) async throws -> [Recipe] {
         guard let url = Bundle.main.url(forResource: "recipes", withExtension: "json") else {
             throw RecipeServiceAPIError.fileNotFound
         }

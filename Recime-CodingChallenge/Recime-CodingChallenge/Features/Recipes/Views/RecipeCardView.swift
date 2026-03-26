@@ -22,9 +22,6 @@ struct RecipeCardView: View {
                 .lineLimit(2)
 
             HStack {
-                Label("\(recipe.servings)", systemImage: "person.2")
-                    .font(.caption)
-                
                 ForEach(recipe.dietaryAttributes, id: \.rawValue) {
                     Text($0.rawValue)
                         .font(.caption)
@@ -34,6 +31,9 @@ struct RecipeCardView: View {
                         .clipShape(Capsule())
                 }
             }
+
+            Label("\(recipe.servings)", systemImage: "person.2")
+                .font(.caption)
         }
         .padding(.vertical, 4)
     }
