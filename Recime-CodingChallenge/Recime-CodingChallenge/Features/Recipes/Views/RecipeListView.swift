@@ -12,7 +12,8 @@ struct RecipeListView: View {
     @StateObject private var viewModel = RecipeListViewModel()
     @State private var recipeSearch = RecipeSearch()
     @State private var showingFilters = false
-
+    @State private var activeFilterCount = 0
+    
     var body: some View {
         NavigationStack {
             Group {
@@ -51,18 +52,35 @@ struct RecipeListView: View {
                     Button {
                         showingFilters = true
                     } label: {
-                        Image(systemName: "line.3.horizontal.decrease")
+                        ZStack(alignment: .topTrailing) {
+                            Image(systemName: "line.3.horizontal.decrease")
+                            
+                            if activeFilterCount > 0 {
+                                Text("\(activeFilterCount)")
+                                    .font(.caption2)
+                                    .bold()
+                                    .foregroundStyle(.white)
+                                    .padding(8)
+                                    .background(Color.red)
+                                    .clipShape(Circle())
+                                    .offset(x: 8, y: 8)
+                            }
+                        }
                     }
                 }
             }
             .sheet(isPresented: $showingFilters) {
-                RecipeFiltersView(filters: $recipeSearch)
+                RecipeFiltersView(filters: $recipeSearch, activeFilterCount: $activeFilterCount)
             }
             .navigationDestination(for: Recipe.self) { recipe in
                 RecipeDetailView(recipe: recipe)
             }
             .task {
-                await viewModel.loadAllRecipes()
+                if activeFilterCount > 0 || !recipeSearch.query.isEmpty {
+                    await viewModel.searchRecipes(search: recipeSearch)
+                } else {
+                    await viewModel.loadAllRecipes()
+                }
             }
         }
     }
