@@ -1,5 +1,5 @@
 //
-//  RecipeSearchFilters.swift
+//  RecipeSearch.swift
 //  Recime-CodingChallenge
 //
 //  Created by Leonardo Medeiros on 25/03/26.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct RecipeSearchFilters: Equatable {
+struct RecipeSearch: Equatable {
     var query: String = ""
     var vegetarianOnly: Bool = false
     var servings: Int?

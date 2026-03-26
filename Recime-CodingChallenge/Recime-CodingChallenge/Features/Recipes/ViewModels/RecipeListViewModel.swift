@@ -36,12 +36,12 @@ final class RecipeListViewModel: ObservableObject {
     }
     
     @MainActor
-    func searchRecipes(filters: RecipeSearchFilters) async {
+    func searchRecipes(search: RecipeSearch) async {
         isLoading = true
         errorMessage = nil
 
         do {
-            recipes = try await service.searchRecipes(filters: filters)
+            recipes = try await service.searchRecipes(search)
         } catch {
             errorMessage = error.localizedDescription
         }

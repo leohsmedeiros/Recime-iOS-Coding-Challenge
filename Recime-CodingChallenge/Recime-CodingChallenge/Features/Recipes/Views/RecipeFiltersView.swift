@@ -9,12 +9,10 @@
 import SwiftUI
 
 struct RecipeFiltersView: View {
-    @Binding var filters: RecipeSearchFilters
+    @Binding var filters: RecipeSearch
     @Environment(\.dismiss) private var dismiss
     
-    @State private var showParams: Bool = false
     @State private var vegetarianOnly: Bool = false
-    @State private var queryText = ""
     @State private var includedText = ""
     @State private var excludedText = ""
     @State private var servingsText = ""
@@ -23,41 +21,32 @@ struct RecipeFiltersView: View {
     var body: some View {
         NavigationStack {
             Form {
-                Section("Query") {
-                    TextField("", text: $queryText)
+                Section("Dietary") {
+                    Toggle("Vegetarian only", isOn: $vegetarianOnly)
                 }
-
-                Toggle("Show Params", isOn: $showParams)
-
-                if showParams {
-                    Section("Dietary") {
-                        Toggle("Vegetarian only", isOn: $vegetarianOnly)
-                    }
-                    
-                    Section("Servings") {
-                        TextField("e.g. 2", text: $servingsText)
-                            .keyboardType(.numberPad)
-                    }
-                    
-                    Section("Include ingredients") {
-                        TextField("e.g. tomato, basil", text: $includedText)
-                    }
-                    
-                    Section("Exclude ingredients") {
-                        TextField("e.g. garlic, onion", text: $excludedText)
-                    }
-                    
-                    Section("Instruction search") {
-                        TextField("e.g. bake, simmer", text: $instructionQuery)
-                    }
+                
+                Section("Servings") {
+                    TextField("e.g. 2", text: $servingsText)
+                        .keyboardType(.numberPad)
+                }
+                
+                Section("Include ingredients") {
+                    TextField("e.g. tomato, basil", text: $includedText)
+                }
+                
+                Section("Exclude ingredients") {
+                    TextField("e.g. garlic, onion", text: $excludedText)
+                }
+                
+                Section("Instruction search") {
+                    TextField("e.g. bake, simmer", text: $instructionQuery)
                 }
             }
-            .navigationTitle("Search")
+            .navigationTitle("Filters")
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     Button("Reset") {
-                        filters = RecipeSearchFilters()
-                        queryText = ""
+                        filters = RecipeSearch()
                         vegetarianOnly = false
                         includedText = ""
                         excludedText = ""
@@ -68,8 +57,8 @@ struct RecipeFiltersView: View {
                 
                 ToolbarItem(placement: .topBarTrailing) {
                     Button("Done") {
-                        filters = RecipeSearchFilters(
-                            query: queryText,
+                        filters = RecipeSearch(
+                            query: filters.query,
                             vegetarianOnly: vegetarianOnly,
                             servings: Int(servingsText),
                             includedIngredients: parseCommaSeparatedValues(includedText),
@@ -82,7 +71,6 @@ struct RecipeFiltersView: View {
                 }
             }
             .onAppear {
-                queryText = filters.query
                 vegetarianOnly = filters.vegetarianOnly
                 includedText = filters.includedIngredients.joined(separator: ", ")
                 excludedText = filters.excludedIngredients.joined(separator: ", ")
@@ -107,7 +95,7 @@ struct RecipeFiltersView: View {
 }
 
 private struct PreviewEmptyContainer: View {
-    @State var filters = RecipeSearchFilters()
+    @State var filters = RecipeSearch()
     
     var body: some View {
         RecipeFiltersView(filters: $filters)
