@@ -23,14 +23,14 @@ struct RecipeListView: View {
                         systemImage: "exclamationmark.triangle",
                         description: Text(errorMessage)
                     )
-                } else if viewModel.visibleRecipes.isEmpty {
+                } else if viewModel.recipes.isEmpty {
                     ContentUnavailableView(
                         "No Recipes Found",
                         systemImage: "magnifyingglass",
                         description: Text("Try adjusting your search or filters.")
                     )
                 } else {
-                    List(viewModel.visibleRecipes) { recipe in
+                    List(viewModel.recipes) { recipe in
                         NavigationLink(value: recipe) {
                             RecipeCardView(recipe: recipe)
                         }
@@ -40,7 +40,9 @@ struct RecipeListView: View {
             }
             .navigationTitle("Recipes")
             .onChange(of: viewModel.filters) { _, _ in
-                viewModel.applyFilters()
+                Task {
+                    await viewModel.loadRecipes()
+                }
             }
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
