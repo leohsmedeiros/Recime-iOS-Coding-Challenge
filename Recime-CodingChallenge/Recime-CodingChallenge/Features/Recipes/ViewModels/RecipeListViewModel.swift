@@ -7,14 +7,14 @@
 
 
 import Foundation
-import SwiftUI
-import Combine
 
-final class RecipeListViewModel: ObservableObject {
-    @Published private(set) var recipes: [Recipe] = []
-    @Published var isLoading = false
-    @Published var errorMessage: String?
+@Observable
+final class RecipeListViewModel {
+    private(set) var recipes: [Recipe] = []
+    var isLoading = false
+    var errorMessage: String?
 
+    @ObservationIgnored
     private let service: RecipeService
 
     init(service: RecipeService = RecipeServiceImpl()) {

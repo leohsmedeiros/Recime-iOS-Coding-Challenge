@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct RecipeListView: View {
-    @StateObject private var viewModel = RecipeListViewModel()
+    @State private var viewModel = RecipeListViewModel()
     @State private var recipeSearch = RecipeSearch()
     @State private var showingFilters = false
     @State private var activeFilterCount = 0
