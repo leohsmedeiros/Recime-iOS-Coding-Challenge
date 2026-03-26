@@ -41,5 +41,4 @@ struct RecipeCardView: View {
 
 #Preview("Recipe Card") {
     RecipeCardView(recipe: .mock)
-        .padding()
 }

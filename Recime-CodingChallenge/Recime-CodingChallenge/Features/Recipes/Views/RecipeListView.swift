@@ -68,5 +68,4 @@ struct RecipeListView: View {
 
 #Preview("Recipe List") {
     RecipeListView()
-        .padding()
 }
