@@ -23,11 +23,10 @@ struct RecipeCardView: View {
 
             HStack {
                 ForEach(recipe.dietaryAttributes, id: \.rawValue) {
-                    Text($0.rawValue)
+                    Text($0.displayName)
                         .font(.caption)
-                        .padding(.horizontal, 8)
-                        .padding(.vertical, 4)
-                        .background(.green.opacity(0.15))
+                        .padding(4)
+                        .background(.green.opacity(0.3))
                         .clipShape(Capsule())
                 }
             }
