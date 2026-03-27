@@ -1,10 +1,10 @@
 # ReciMe iOS Coding Challenge
 
 ## Setup instructions
-1. Open the project in Xcode 16 or later, ensuring the iOS SDK and simulators are properly installed.
+1. Open the project in Xcode 26 or later, ensuring the iOS SDK and simulators are properly installed.
 2. Clone the repository:
 ```
-git clone https://github.com/your-username/recime-coding-challenge.git
+git clone https://github.com/leohsmedeiros/Recime-iOS-Coding-Challenge.git
 ```
 3. Build and run on an iOS 26+ simulator
 4. No external dependencies are required
@@ -17,9 +17,9 @@ This project uses the MVVM architecture with clear separation of concerns:
 - SwiftUI views focus on presentation and user interaction
 
 ## Key Design Decisions
-- Chose MVVM to keep business logic out of SwiftUI views
+- Chose MVVM to separate business logic from SwiftUI views and enable a reactive data flow.
 - Introduced a RecipeAPI protocol to simulate a real backend and allow easy replacement with a remote implementation
-- Used a filter object to centralize search/filter state
+- Used a RecipeSearch object to centralize search/filter state
 - Used a custom search input and filter sheet to allow flexible UI composition and better control over filtering interactions
 - Separation of concerns:
 ```
