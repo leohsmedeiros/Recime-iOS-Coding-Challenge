@@ -9,18 +9,18 @@
 import Foundation
 
 final class RecipeServiceImpl: RecipeService {
-    let request: APIRequest
+    let api: RecipeAPI
     
-    init(request: APIRequest = LocalAPIRequest()) {
-        self.request = request
+    init(api: RecipeAPI = LocalRecipeAPI()) {
+        self.api = api
     }
     
     func fetchAllRecipes() async throws -> [Recipe] {
-        return try await request.getRecipes()
+        return try await api.getRecipes()
     }
 
     func searchRecipes(_ recipeSearch: RecipeSearch) async throws -> [Recipe] {
-        let recipes = try await request.getRecipes()
+        let recipes = try await api.getRecipes()
         return recipes.filter { recipe in
             matchesQuery(recipe, search: recipeSearch)
             && matchesVegetarianOnly(recipe, search: recipeSearch)

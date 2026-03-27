@@ -16,7 +16,7 @@ final class RecipeServiceImplTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
-        sut = RecipeServiceImpl(request: MockAPIRequest())
+        sut = RecipeServiceImpl(api: MockRecipeAPI())
     }
 
     override func tearDown() {

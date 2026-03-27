@@ -1,5 +1,5 @@
 //
-//  MockAPIRequest.swift
+//  MockRecipeAPI.swift
 //  Recime-CodingChallenge
 //
 //  Created by Leonardo Medeiros on 26/03/26.
@@ -8,7 +8,7 @@
 import Foundation
 @testable import Recime_CodingChallenge
 
-final class MockAPIRequest: APIRequest {
+final class MockRecipeAPI: RecipeAPI {
     func getRecipes() async throws -> [Recipe] {
         return [
             Recipe(id: UUID(uuidString: "1E2D3C4B-0001-4A1B-8F00-000000000001")!,

@@ -1,5 +1,5 @@
 //
-//  LocalAPIRequest.swift
+//  LocalRecipeAPI.swift
 //  Recime-CodingChallenge
 //
 //  Created by Leonardo Medeiros on 26/03/26.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-final class LocalAPIRequest: APIRequest {
+final class LocalRecipeAPI: RecipeAPI {
     func getRecipes() async throws -> [Recipe] {
         guard let url = Bundle.main.url(forResource: "recipes", withExtension: "json") else {
             throw RecipeServiceAPIError.fileNotFound
