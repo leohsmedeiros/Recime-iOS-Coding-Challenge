@@ -46,7 +46,7 @@ final class MockAPIRequest: APIRequest {
                     "Assemble bowl with spinach and quinoa.",
                     "Top with roasted vegetables."
                    ],
-                   dietaryAttributes: [.vegetarian, .vegan]),
+                   dietaryAttributes: [.glutenFree]),
         ]
     }
 }

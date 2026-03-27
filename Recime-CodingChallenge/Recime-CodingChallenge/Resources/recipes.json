@@ -39,7 +39,7 @@
       "Assemble bowl with spinach and quinoa.",
       "Top with roasted vegetables."
     ],
-    "dietaryAttributes": ["vegetarian", "vegan"]
+    "dietaryAttributes": ["vegetarian"]
   },
   {
     "id": "1E2D3C4B-0004-4A1B-8F00-000000000004",
@@ -66,7 +66,7 @@
       "Mash avocado with lemon, salt, and pepper.",
       "Spread on toast and serve."
     ],
-    "dietaryAttributes": ["vegetarian", "vegan"]
+    "dietaryAttributes": ["vegetarian"]
   },
   {
     "id": "1E2D3C4B-0006-4A1B-8F00-000000000006",
@@ -121,7 +121,7 @@
       "Add remaining vegetables and broth.",
       "Simmer until vegetables are tender."
     ],
-    "dietaryAttributes": ["vegetarian", "vegan", "glutenFree"]
+    "dietaryAttributes": ["vegetarian", "glutenFree"]
   },
   {
     "id": "1E2D3C4B-0010-4A1B-8F00-000000000010",
