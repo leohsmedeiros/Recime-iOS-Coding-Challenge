@@ -42,7 +42,7 @@ final class RecipeServiceImpl: RecipeService {
     
     private func matchesVegetarianOnly(_ recipe: Recipe, search: RecipeSearch) -> Bool {
         guard search.vegetarianOnly else { return true }
-        return recipe.dietaryAttributes.count == 1 && recipe.dietaryAttributes.contains(.vegetarian)
+        return recipe.dietaryAttributes.contains(.vegetarian)
     }
     
     private func matchesServings(_ recipe: Recipe, search: RecipeSearch) -> Bool {
