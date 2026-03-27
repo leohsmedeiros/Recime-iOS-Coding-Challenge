@@ -104,12 +104,45 @@ final class RecipeListViewModelTests: XCTestCase {
         XCTAssertNil(sut.errorMessage)
     }
     
-//    func test_computeActiveFilterCount_whenNoFilters_returnsZero() {
-//        let sut = RecipeListViewModel(service: MockRecipeService())
-//        let search = RecipeSearch()
-//
-//        let result = sut.computeActiveFilterCount(search: search)
-//
-//        XCTAssertEqual(result, 0)
-//    }
+    func test_computeActiveFilterCount_whenNoFilters_returnsZero() {
+        let sut = RecipeListViewModel(service: MockRecipeService())
+        let search = RecipeSearch()
+
+        let result = sut.computeActiveFilterCount(search: search)
+
+        XCTAssertEqual(result, 0)
+    }
+    
+    func test_computeActiveFilterCount_whenOnlyQueryIsSet_returnsZero() {
+        let sut = RecipeListViewModel(service: MockRecipeService())
+        let search = RecipeSearch(query: "pasta")
+
+        let result = sut.computeActiveFilterCount(search: search)
+
+        XCTAssertEqual(result, 0)
+    }
+    
+    func test_computeActiveFilterCount_whenMultipleFiltersSet_returnsCorrectCount() {
+        let sut = RecipeListViewModel(service: MockRecipeService())
+        let search = RecipeSearch(
+            vegetarianOnly: true,
+            servings: 2,
+            includedIngredients: ["tomato"],
+            excludedIngredients: ["beef"],
+            instructionQuery: "boil"
+        )
+
+        let result = sut.computeActiveFilterCount(search: search)
+
+        XCTAssertEqual(result, 5)
+    }
+    
+    func test_computeActiveFilterCount_whenInstructionQueryIsWhitespace_returnsZero() {
+        let sut = RecipeListViewModel(service: MockRecipeService())
+        let search = RecipeSearch(instructionQuery: "   ")
+
+        let result = sut.computeActiveFilterCount(search: search)
+
+        XCTAssertEqual(result, 0)
+    }
 }
