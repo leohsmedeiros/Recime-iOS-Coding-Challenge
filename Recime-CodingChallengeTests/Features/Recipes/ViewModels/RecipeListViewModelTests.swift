@@ -18,7 +18,7 @@ final class RecipeListViewModelTests: XCTestCase {
 
         let sut = RecipeListViewModel(service: mockService)
 
-        await sut.loadAllRecipes()
+        await sut.loadRecipes(search: RecipeSearch())
 
         XCTAssertTrue(mockService.fetchAllRecipesCalled)
         XCTAssertEqual(sut.recipes, expectedRecipes)
@@ -32,7 +32,7 @@ final class RecipeListViewModelTests: XCTestCase {
 
         let sut = RecipeListViewModel(service: mockService)
 
-        await sut.loadAllRecipes()
+        await sut.loadRecipes(search: RecipeSearch())
 
         XCTAssertTrue(mockService.fetchAllRecipesCalled)
         XCTAssertEqual(sut.recipes, [])
@@ -55,7 +55,7 @@ final class RecipeListViewModelTests: XCTestCase {
 
         let sut = RecipeListViewModel(service: mockService)
 
-        await sut.searchRecipes(search: search)
+        await sut.loadRecipes(search: search)
 
         XCTAssertTrue(mockService.searchRecipesCalled)
         XCTAssertEqual(mockService.receivedSearch, search)
@@ -71,7 +71,7 @@ final class RecipeListViewModelTests: XCTestCase {
 
         let sut = RecipeListViewModel(service: mockService)
 
-        await sut.searchRecipes(search: search)
+        await sut.loadRecipes(search: search)
 
         XCTAssertTrue(mockService.searchRecipesCalled)
         XCTAssertEqual(mockService.receivedSearch, search)
@@ -87,7 +87,7 @@ final class RecipeListViewModelTests: XCTestCase {
         let sut = RecipeListViewModel(service: mockService)
         sut.errorMessage = "Old error"
 
-        await sut.loadAllRecipes()
+        await sut.loadRecipes(search: RecipeSearch())
 
         XCTAssertNil(sut.errorMessage)
     }
@@ -99,7 +99,7 @@ final class RecipeListViewModelTests: XCTestCase {
         let sut = RecipeListViewModel(service: mockService)
         sut.errorMessage = "Old error"
 
-        await sut.searchRecipes(search: RecipeSearch(query: "pasta"))
+        await sut.loadRecipes(search: RecipeSearch(query: "pasta"))
 
         XCTAssertNil(sut.errorMessage)
     }

@@ -38,6 +38,15 @@
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES"
       queueDebuggingEnableBacktraceRecording = "Yes">
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "94B87A382F7324AB00DE4043"
+            BuildableName = "Recime-CodingChallenge.app"
+            BlueprintName = "Recime-CodingChallenge"
+            ReferencedContainer = "container:Recime-CodingChallenge.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"

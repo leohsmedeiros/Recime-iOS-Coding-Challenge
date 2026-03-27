@@ -44,7 +44,7 @@ struct RecipeListView: View {
             .searchable(text: $recipeSearch.query, prompt: "Search recipes")
             .onChange(of: recipeSearch) { _, _ in
                 Task {
-                    await viewModel.searchRecipes(search: recipeSearch)
+                    await viewModel.loadRecipes(search: recipeSearch)
                 }
             }
             .toolbar {
@@ -76,11 +76,7 @@ struct RecipeListView: View {
                 RecipeDetailView(recipe: recipe)
             }
             .task {
-                if activeFilterCount > 0 || !recipeSearch.query.isEmpty {
-                    await viewModel.searchRecipes(search: recipeSearch)
-                } else {
-                    await viewModel.loadAllRecipes()
-                }
+                await viewModel.loadRecipes(search: recipeSearch)
             }
         }
     }

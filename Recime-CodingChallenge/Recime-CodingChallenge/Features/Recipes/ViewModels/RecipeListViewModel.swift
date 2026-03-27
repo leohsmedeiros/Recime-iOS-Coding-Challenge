@@ -22,12 +22,16 @@ final class RecipeListViewModel {
     }
 
     @MainActor
-    func loadAllRecipes() async {
+    func loadRecipes(search: RecipeSearch) async {
         isLoading = true
         errorMessage = nil
 
         do {
-            recipes = try await service.fetchAllRecipes()
+            if hasActiveFilter(search: search) || !search.query.isEmpty {
+                recipes = try await service.searchRecipes(search)
+            } else {
+                recipes = try await service.fetchAllRecipes()
+            }
         } catch {
             errorMessage = error.localizedDescription
         }
@@ -35,18 +39,15 @@ final class RecipeListViewModel {
         isLoading = false
     }
     
-    @MainActor
-    func searchRecipes(search: RecipeSearch) async {
-        isLoading = true
-        errorMessage = nil
-
-        do {
-            recipes = try await service.searchRecipes(search)
-        } catch {
-            errorMessage = error.localizedDescription
+    private func hasActiveFilter(search: RecipeSearch) -> Bool {
+        if search.vegetarianOnly { return true }
+        if search.servings != nil { return true }
+        if !search.includedIngredients.isEmpty { return true }
+        if !search.excludedIngredients.isEmpty { return true }
+        if !search.instructionQuery.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            return true
         }
-
-        isLoading = false
+        
+        return false
     }
-
 }
