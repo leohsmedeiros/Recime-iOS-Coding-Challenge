@@ -10,7 +10,6 @@ import SwiftUI
 
 struct RecipeFiltersView: View {
     @Binding var filters: RecipeSearch
-    @Binding var activeFilterCount: Int
     @Environment(\.dismiss) private var dismiss
     
     @State private var vegetarianOnly: Bool = false
@@ -66,7 +65,6 @@ struct RecipeFiltersView: View {
                             excludedIngredients: parseCommaSeparatedValues(excludedText),
                             instructionQuery: instructionQuery
                         )
-                        activeFilterCount = computeActiveFilterCount()
                         
                         dismiss()
                     }
@@ -83,21 +81,7 @@ struct RecipeFiltersView: View {
             }
         }
     }
-    
-    private func computeActiveFilterCount() -> Int {
-        var count = 0
         
-        if filters.vegetarianOnly { count += 1 }
-        if filters.servings != nil { count += 1 }
-        if !filters.includedIngredients.isEmpty { count += 1 }
-        if !filters.excludedIngredients.isEmpty { count += 1 }
-        if !filters.instructionQuery.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-            count += 1
-        }
-        
-        return count
-    }
-    
     private func parseCommaSeparatedValues(_ value: String) -> [String] {
         value
             .split(separator: ",")
@@ -112,9 +96,8 @@ struct RecipeFiltersView: View {
 
 private struct PreviewEmptyContainer: View {
     @State var filters = RecipeSearch()
-    @State var activeFilterCount = 0
     
     var body: some View {
-        RecipeFiltersView(filters: $filters, activeFilterCount: $activeFilterCount)
+        RecipeFiltersView(filters: $filters)
     }
 }

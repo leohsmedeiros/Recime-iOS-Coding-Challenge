@@ -43,6 +43,8 @@ struct RecipeListView: View {
             .navigationTitle("Recipes")
             .searchable(text: $recipeSearch.query, prompt: "Search recipes")
             .onChange(of: recipeSearch) { _, _ in
+                activeFilterCount = viewModel.computeActiveFilterCount(search: recipeSearch)
+                
                 Task {
                     await viewModel.loadRecipes(search: recipeSearch)
                 }
@@ -63,14 +65,14 @@ struct RecipeListView: View {
                                     .padding(8)
                                     .background(Color.red)
                                     .clipShape(Circle())
-                                    .offset(x: 8, y: 8)
+                                    .offset(x: 6, y: 6)
                             }
                         }
                     }
                 }
             }
             .sheet(isPresented: $showingFilters) {
-                RecipeFiltersView(filters: $recipeSearch, activeFilterCount: $activeFilterCount)
+                RecipeFiltersView(filters: $recipeSearch)
             }
             .navigationDestination(for: Recipe.self) { recipe in
                 RecipeDetailView(recipe: recipe)

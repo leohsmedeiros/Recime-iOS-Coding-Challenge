@@ -103,4 +103,13 @@ final class RecipeListViewModelTests: XCTestCase {
 
         XCTAssertNil(sut.errorMessage)
     }
+    
+//    func test_computeActiveFilterCount_whenNoFilters_returnsZero() {
+//        let sut = RecipeListViewModel(service: MockRecipeService())
+//        let search = RecipeSearch()
+//
+//        let result = sut.computeActiveFilterCount(search: search)
+//
+//        XCTAssertEqual(result, 0)
+//    }
 }

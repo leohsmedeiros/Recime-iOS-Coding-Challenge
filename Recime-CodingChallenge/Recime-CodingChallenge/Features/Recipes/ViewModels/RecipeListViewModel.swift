@@ -27,7 +27,7 @@ final class RecipeListViewModel {
         errorMessage = nil
 
         do {
-            if hasActiveFilter(search: search) || !search.query.isEmpty {
+            if computeActiveFilterCount(search: search) > 0 || !search.query.isEmpty {
                 recipes = try await service.searchRecipes(search)
             } else {
                 recipes = try await service.fetchAllRecipes()
@@ -39,15 +39,17 @@ final class RecipeListViewModel {
         isLoading = false
     }
     
-    private func hasActiveFilter(search: RecipeSearch) -> Bool {
-        if search.vegetarianOnly { return true }
-        if search.servings != nil { return true }
-        if !search.includedIngredients.isEmpty { return true }
-        if !search.excludedIngredients.isEmpty { return true }
+    public func computeActiveFilterCount(search: RecipeSearch) -> Int {
+        var count = 0
+        
+        if search.vegetarianOnly { count += 1 }
+        if search.servings != nil { count += 1 }
+        if !search.includedIngredients.isEmpty { count += 1 }
+        if !search.excludedIngredients.isEmpty { count += 1 }
         if !search.instructionQuery.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-            return true
+            count += 1
         }
         
-        return false
+        return count
     }
 }
