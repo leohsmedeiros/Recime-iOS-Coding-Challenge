@@ -64,8 +64,8 @@ struct RecipeFiltersView: View {
                         )
                     }
                 }
-                .padding(.horizontal, AppSpacing.s10)
-                .padding(.vertical, AppSpacing.s8)
+                .padding(.horizontal, AppSpacing.lg)
+                .padding(.vertical, AppSpacing.md)
             }
             .background(Color.App.surfaceContainerLow)
             .navigationTitle("Filters")
@@ -80,7 +80,6 @@ struct RecipeFiltersView: View {
                         servingsText = ""
                         instructionQuery = ""
                     }
-                    .buttonStyle(.appTertiary)
                 }
 
                 ToolbarItem(placement: .topBarTrailing) {
@@ -95,7 +94,6 @@ struct RecipeFiltersView: View {
                         )
                         dismiss()
                     }
-                    .buttonStyle(.appPrimary)
                 }
             }
             .onAppear {
