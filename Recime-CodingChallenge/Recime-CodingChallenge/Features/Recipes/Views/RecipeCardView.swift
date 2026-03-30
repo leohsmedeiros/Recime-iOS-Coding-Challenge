@@ -9,7 +9,7 @@ import SwiftUI
 
 struct RecipeCardView: View {
     let recipe: Recipe
-
+    
     private var heroGradient: LinearGradient {
         LinearGradient(
             colors: [Color.App.primaryContainer, Color.App.primary],
@@ -17,40 +17,42 @@ struct RecipeCardView: View {
             endPoint: .bottomTrailing
         )
     }
-
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-
+            
             // MARK: Hero — dietary badges float over the gradient
             ZStack(alignment: .bottomLeading) {
                 heroGradient
                     .frame(height: 140)
-
+                
                 if !recipe.dietaryAttributes.isEmpty {
                     HStack(spacing: AppSpacing.xs) {
                         ForEach(recipe.dietaryAttributes, id: \.self) { attr in
-                            Text(attr.displayName)
-                                .eyebrowStyle()
-                                .foregroundStyle(Color.App.primaryFixedDim)
+                            SelectionChip(
+                                title: attr.displayName,
+                                isSelected: true,
+                                action: {}
+                            )
                         }
                     }
                     .padding(.horizontal, AppSpacing.lg)
                     .padding(.bottom, AppSpacing.md)
                 }
             }
-
+            
             // MARK: Content — spacing-5 separates hero from title
             VStack(alignment: .leading, spacing: AppSpacing.sm) {
-
+                
                 Label("\(recipe.servings) servings", systemImage: "person.2")
                     .eyebrowStyle()
                     .foregroundStyle(Color.App.primaryFixedDim)
-
+                
                 Text(recipe.title)
                     .font(.App.displaySm)
                     .foregroundStyle(Color.App.onSurface)
                     .lineLimit(2)
-
+                
                 Text(recipe.description)
                     .font(.App.bodySm)
                     .foregroundStyle(Color.App.onSurfaceVariant)

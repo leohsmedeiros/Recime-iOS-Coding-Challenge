@@ -30,10 +30,6 @@ struct RecipeDetailView: View {
                         .frame(height: heroHeight)
 
                     VStack(alignment: .leading, spacing: AppSpacing.sm) {
-                        Text("Recipe")
-                            .eyebrowStyle()
-                            .foregroundStyle(Color.App.primaryFixedDim)
-
                         Text(recipe.title)
                             .font(.App.displayLg)
                             .foregroundStyle(Color.App.onPrimary)
