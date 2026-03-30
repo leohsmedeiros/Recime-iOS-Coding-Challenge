@@ -5,93 +5,66 @@
 //  Created by Leonardo Medeiros on 26/03/26.
 //
 
-
-import XCTest
+import Testing
 @testable import Recime_CodingChallenge
 
-@MainActor
-final class RecipeServiceImplTests: XCTestCase {
+@Suite struct RecipeServiceImplTests {
+    private let sut = RecipeServiceImpl(api: MockRecipeAPI())
 
-    private var sut: RecipeServiceImpl!
+    @Test func searchRecipes_withEmptySearch_returnsAllRecipes() async throws {
+        let recipes = try await sut.searchRecipes(RecipeSearch())
 
-    override func setUp() {
-        super.setUp()
-        sut = RecipeServiceImpl(api: MockRecipeAPI())
-    }
-
-    override func tearDown() {
-        sut = nil
-        super.tearDown()
-    }
-
-    func test_searchRecipes_withEmptySearch_returnsAllRecipes() async throws {
-        let search = RecipeSearch()
-
-        let recipes = try await sut.searchRecipes(search)
-
-        XCTAssertEqual(recipes.count, 3)
-        XCTAssertEqual(recipes.map { $0.title }, [
+        #expect(recipes.count == 3)
+        #expect(recipes.map(\.title) == [
             "Vegetarian Pasta",
             "Grilled Chicken Salad",
             "Vegan Buddha Bowl"
         ])
     }
 
-    func test_searchRecipes_filtersByQuery() async throws {
-        let search = RecipeSearch(query: "pasta")
+    @Test func searchRecipes_filtersByQuery() async throws {
+        let recipes = try await sut.searchRecipes(RecipeSearch(query: "pasta"))
 
-        let recipes = try await sut.searchRecipes(search)
-
-        XCTAssertEqual(recipes.count, 1)
-        XCTAssertEqual(recipes.first?.title, "Vegetarian Pasta")
+        #expect(recipes.count == 1)
+        #expect(recipes.first?.title == "Vegetarian Pasta")
     }
 
-    func test_searchRecipes_filtersByServings() async throws {
-        let search = RecipeSearch(servings: 1)
+    @Test func searchRecipes_filtersByServings() async throws {
+        let recipes = try await sut.searchRecipes(RecipeSearch(servings: 1))
 
-        let recipes = try await sut.searchRecipes(search)
-
-        XCTAssertEqual(recipes.count, 1)
-        XCTAssertEqual(recipes.first?.title, "Vegetarian Pasta")
+        #expect(recipes.count == 1)
+        #expect(recipes.first?.title == "Vegetarian Pasta")
     }
 
-    func test_searchRecipes_filtersByIncludedIngredients() async throws {
-        let search = RecipeSearch(includedIngredients: ["garlic"])
+    @Test func searchRecipes_filtersByIncludedIngredients() async throws {
+        let recipes = try await sut.searchRecipes(RecipeSearch(includedIngredients: ["garlic"]))
 
-        let recipes = try await sut.searchRecipes(search)
-
-        XCTAssertEqual(recipes.count, 1)
-        XCTAssertEqual(Set(recipes.map(\.title)), ["Vegetarian Pasta"])
+        #expect(recipes.count == 1)
+        #expect(recipes.first?.title == "Vegetarian Pasta")
     }
 
-    func test_searchRecipes_filtersByExcludedIngredients() async throws {
-        let search = RecipeSearch(excludedIngredients: ["chicken"])
+    @Test func searchRecipes_filtersByExcludedIngredients() async throws {
+        let recipes = try await sut.searchRecipes(RecipeSearch(excludedIngredients: ["chicken"]))
 
-        let recipes = try await sut.searchRecipes(search)
-
-        XCTAssertEqual(recipes.count, 2)
-        XCTAssertFalse(recipes.contains { $0.title == "Chicken Curry" })
+        #expect(recipes.count == 2)
+        #expect(!recipes.contains { $0.title == "Grilled Chicken Salad" })
     }
 
-    func test_searchRecipes_filtersByInstructionQuery() async throws {
-        let search = RecipeSearch(instructionQuery: "Boil the pasta")
+    @Test func searchRecipes_filtersByInstructionQuery() async throws {
+        let recipes = try await sut.searchRecipes(RecipeSearch(instructionQuery: "Boil the pasta"))
 
-        let recipes = try await sut.searchRecipes(search)
-
-        XCTAssertEqual(recipes.count, 1)
-        XCTAssertEqual(recipes.first?.title, "Vegetarian Pasta")
+        #expect(recipes.count == 1)
+        #expect(recipes.first?.title == "Vegetarian Pasta")
     }
 
-    func test_searchRecipes_filtersByVegetarianOnly_returnsOnlyStrictVegetarianRecipes() async throws {
-        let search = RecipeSearch(vegetarianOnly: true)
+    @Test func searchRecipes_filtersByVegetarianOnly() async throws {
+        let recipes = try await sut.searchRecipes(RecipeSearch(vegetarianOnly: true))
 
-        let recipes = try await sut.searchRecipes(search)
-
-        XCTAssertEqual(recipes.count, 1)
-        XCTAssertEqual(recipes.first?.title, "Vegetarian Pasta")
+        #expect(recipes.count == 1)
+        #expect(recipes.first?.title == "Vegetarian Pasta")
     }
 
-    func test_searchRecipes_appliesCombinedFilters() async throws {
+    @Test func searchRecipes_appliesCombinedFilters() async throws {
         let search = RecipeSearch(
             query: "pasta",
             vegetarianOnly: true,
@@ -103,7 +76,7 @@ final class RecipeServiceImplTests: XCTestCase {
 
         let recipes = try await sut.searchRecipes(search)
 
-        XCTAssertEqual(recipes.count, 1)
-        XCTAssertEqual(recipes.first?.title, "Vegetarian Pasta")
+        #expect(recipes.count == 1)
+        #expect(recipes.first?.title == "Vegetarian Pasta")
     }
 }

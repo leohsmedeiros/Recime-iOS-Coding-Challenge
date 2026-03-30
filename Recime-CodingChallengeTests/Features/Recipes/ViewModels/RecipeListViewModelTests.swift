@@ -5,42 +5,42 @@
 //  Created by Leonardo Medeiros on 26/03/26.
 //
 
-import XCTest
+import Testing
 @testable import Recime_CodingChallenge
 
-@MainActor
-final class RecipeListViewModelTests: XCTestCase {
+@Suite struct RecipeListViewModelTests {
 
-    func test_loadAllRecipes_success_updatesRecipesAndClearsError() async {
+    // MARK: - loadRecipes
+    // loadRecipes is @MainActor on the ViewModel, so tests calling it must be too.
+
+    @Test @MainActor
+    func loadRecipes_onSuccess_updatesRecipesAndClearsError() async {
         let mockService = MockRecipeService()
-        let expectedRecipes = [Recipe.mock]
-        mockService.fetchAllRecipesResult = .success(expectedRecipes)
-
+        mockService.searchRecipesResult = .success([Recipe.mock])
         let sut = RecipeListViewModel(service: mockService)
 
         await sut.loadRecipes(search: RecipeSearch())
 
-        XCTAssertTrue(mockService.fetchAllRecipesCalled)
-        XCTAssertEqual(sut.recipes, expectedRecipes)
-        XCTAssertNil(sut.errorMessage)
-        XCTAssertFalse(sut.isLoading)
+        #expect(sut.recipes == [Recipe.mock])
+        #expect(sut.errorMessage == nil)
+        #expect(!sut.isLoading)
     }
 
-    func test_loadAllRecipes_failure_setsErrorMessageAndStopsLoading() async {
+    @Test @MainActor
+    func loadRecipes_onFailure_setsErrorMessageAndStopsLoading() async {
         let mockService = MockRecipeService()
-        mockService.fetchAllRecipesResult = .failure(RecipeServiceAPIError.fileNotFound)
-
+        mockService.searchRecipesResult = .failure(RecipeServiceAPIError.fileNotFound)
         let sut = RecipeListViewModel(service: mockService)
 
         await sut.loadRecipes(search: RecipeSearch())
 
-        XCTAssertTrue(mockService.fetchAllRecipesCalled)
-        XCTAssertEqual(sut.recipes, [])
-        XCTAssertEqual(sut.errorMessage, "Could not find the bundled recipes file.")
-        XCTAssertFalse(sut.isLoading)
+        #expect(sut.recipes.isEmpty)
+        #expect(sut.errorMessage == "Could not find the bundled recipes file.")
+        #expect(!sut.isLoading)
     }
 
-    func test_searchRecipes_success_updatesRecipesAndPassesSearchObject() async {
+    @Test @MainActor
+    func loadRecipes_forwardsSearchObjectToService() async {
         let mockService = MockRecipeService()
         let search = RecipeSearch(
             query: "pasta",
@@ -50,79 +50,62 @@ final class RecipeListViewModelTests: XCTestCase {
             excludedIngredients: ["beef"],
             instructionQuery: "boil"
         )
-        let expectedRecipes = [Recipe.mock]
-        mockService.searchRecipesResult = .success(expectedRecipes)
-
+        mockService.searchRecipesResult = .success([Recipe.mock])
         let sut = RecipeListViewModel(service: mockService)
 
         await sut.loadRecipes(search: search)
 
-        XCTAssertTrue(mockService.searchRecipesCalled)
-        XCTAssertEqual(mockService.receivedSearch, search)
-        XCTAssertEqual(sut.recipes, expectedRecipes)
-        XCTAssertNil(sut.errorMessage)
-        XCTAssertFalse(sut.isLoading)
+        #expect(mockService.searchRecipesCalled)
+        #expect(mockService.receivedSearch == search)
+        #expect(sut.recipes == [Recipe.mock])
+        #expect(sut.errorMessage == nil)
+        #expect(!sut.isLoading)
     }
 
-    func test_searchRecipes_failure_setsErrorMessageAndStopsLoading() async {
+    @Test @MainActor
+    func loadRecipes_withFilter_failure_setsErrorMessageAndStopsLoading() async {
         let mockService = MockRecipeService()
         let search = RecipeSearch(query: "invalid")
         mockService.searchRecipesResult = .failure(RecipeServiceAPIError.fileNotFound)
-
         let sut = RecipeListViewModel(service: mockService)
 
         await sut.loadRecipes(search: search)
 
-        XCTAssertTrue(mockService.searchRecipesCalled)
-        XCTAssertEqual(mockService.receivedSearch, search)
-        XCTAssertEqual(sut.recipes, [])
-        XCTAssertEqual(sut.errorMessage, "Could not find the bundled recipes file.")
-        XCTAssertFalse(sut.isLoading)
+        #expect(mockService.searchRecipesCalled)
+        #expect(mockService.receivedSearch == search)
+        #expect(sut.recipes.isEmpty)
+        #expect(sut.errorMessage == "Could not find the bundled recipes file.")
+        #expect(!sut.isLoading)
     }
 
-    func test_loadAllRecipes_clearsPreviousErrorBeforeLoading() async {
+    @Test @MainActor
+    func loadRecipes_clearsPreviousErrorBeforeLoading() async {
         let mockService = MockRecipeService()
-        mockService.fetchAllRecipesResult = .success([Recipe.mock])
-
+        mockService.searchRecipesResult = .success([Recipe.mock])
         let sut = RecipeListViewModel(service: mockService)
         sut.errorMessage = "Old error"
 
         await sut.loadRecipes(search: RecipeSearch())
 
-        XCTAssertNil(sut.errorMessage)
+        #expect(sut.errorMessage == nil)
     }
 
-    func test_searchRecipes_clearsPreviousErrorBeforeLoading() async {
-        let mockService = MockRecipeService()
-        mockService.searchRecipesResult = .success([Recipe.mock])
+    // MARK: - computeActiveFilterCount
+    // Pure computation — no actor isolation needed.
 
-        let sut = RecipeListViewModel(service: mockService)
-        sut.errorMessage = "Old error"
-
-        await sut.loadRecipes(search: RecipeSearch(query: "pasta"))
-
-        XCTAssertNil(sut.errorMessage)
-    }
-    
-    func test_computeActiveFilterCount_whenNoFilters_returnsZero() {
+    @Test func computeActiveFilterCount_whenNoFilters_returnsZero() {
         let sut = RecipeListViewModel(service: MockRecipeService())
-        let search = RecipeSearch()
 
-        let result = sut.computeActiveFilterCount(search: search)
-
-        XCTAssertEqual(result, 0)
+        #expect(sut.computeActiveFilterCount(search: RecipeSearch()) == 0)
     }
-    
-    func test_computeActiveFilterCount_whenOnlyQueryIsSet_returnsZero() {
+
+    @Test func computeActiveFilterCount_whenOnlyQueryIsSet_returnsZero() {
         let sut = RecipeListViewModel(service: MockRecipeService())
-        let search = RecipeSearch(query: "pasta")
 
-        let result = sut.computeActiveFilterCount(search: search)
-
-        XCTAssertEqual(result, 0)
+        #expect(sut.computeActiveFilterCount(search: RecipeSearch(query: "pasta")) == 0)
     }
-    
-    func test_computeActiveFilterCount_whenMultipleFiltersSet_returnsCorrectCount() {
+
+    @Test func computeActiveFilterCount_whenMultipleFiltersSet_returnsCorrectCount() {
         let sut = RecipeListViewModel(service: MockRecipeService())
         let search = RecipeSearch(
             vegetarianOnly: true,
@@ -132,17 +115,12 @@ final class RecipeListViewModelTests: XCTestCase {
             instructionQuery: "boil"
         )
 
-        let result = sut.computeActiveFilterCount(search: search)
-
-        XCTAssertEqual(result, 5)
+        #expect(sut.computeActiveFilterCount(search: search) == 5)
     }
-    
-    func test_computeActiveFilterCount_whenInstructionQueryIsWhitespace_returnsZero() {
+
+    @Test func computeActiveFilterCount_whenInstructionQueryIsWhitespace_returnsZero() {
         let sut = RecipeListViewModel(service: MockRecipeService())
-        let search = RecipeSearch(instructionQuery: "   ")
 
-        let result = sut.computeActiveFilterCount(search: search)
-
-        XCTAssertEqual(result, 0)
+        #expect(sut.computeActiveFilterCount(search: RecipeSearch(instructionQuery: "   ")) == 0)
     }
 }
