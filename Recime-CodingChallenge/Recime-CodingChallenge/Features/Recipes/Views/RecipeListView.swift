@@ -42,13 +42,6 @@ struct RecipeListView: View {
             }
             .navigationTitle("Recipes")
             .searchable(text: $recipeSearch.query, prompt: "Search recipes")
-            .onChange(of: recipeSearch) { _, _ in
-                activeFilterCount = viewModel.computeActiveFilterCount(search: recipeSearch)
-                
-                Task {
-                    await viewModel.loadRecipes(search: recipeSearch)
-                }
-            }
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
@@ -77,7 +70,8 @@ struct RecipeListView: View {
             .navigationDestination(for: Recipe.self) { recipe in
                 RecipeDetailView(recipe: recipe)
             }
-            .task {
+            .task(id: recipeSearch) {
+                activeFilterCount = viewModel.computeActiveFilterCount(search: recipeSearch)
                 await viewModel.loadRecipes(search: recipeSearch)
             }
         }

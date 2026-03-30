@@ -24,8 +24,10 @@ final class RecipeServiceImplTests: XCTestCase {
         super.tearDown()
     }
 
-    func test_fetchAllRecipes_returnsAllRecipesCorrectly() async throws {
-        let recipes = try await sut.fetchAllRecipes()
+    func test_searchRecipes_withEmptySearch_returnsAllRecipes() async throws {
+        let search = RecipeSearch()
+
+        let recipes = try await sut.searchRecipes(search)
 
         XCTAssertEqual(recipes.count, 3)
         XCTAssertEqual(recipes.map { $0.title }, [
@@ -33,14 +35,6 @@ final class RecipeServiceImplTests: XCTestCase {
             "Grilled Chicken Salad",
             "Vegan Buddha Bowl"
         ])
-    }
-
-    func test_searchRecipes_withEmptySearch_returnsAllRecipes() async throws {
-        let search = RecipeSearch()
-
-        let recipes = try await sut.searchRecipes(search)
-
-        XCTAssertEqual(recipes.count, 3)
     }
 
     func test_searchRecipes_filtersByQuery() async throws {

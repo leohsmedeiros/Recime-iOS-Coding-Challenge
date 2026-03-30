@@ -27,11 +27,7 @@ final class RecipeListViewModel {
         errorMessage = nil
 
         do {
-            if computeActiveFilterCount(search: search) > 0 || !search.query.isEmpty {
-                recipes = try await service.searchRecipes(search)
-            } else {
-                recipes = try await service.fetchAllRecipes()
-            }
+            recipes = try await service.searchRecipes(search)
         } catch {
             errorMessage = error.localizedDescription
         }

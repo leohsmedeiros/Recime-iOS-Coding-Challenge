@@ -14,10 +14,6 @@ final class RecipeServiceImpl: RecipeService {
     init(api: RecipeAPI = LocalRecipeAPI()) {
         self.api = api
     }
-    
-    func fetchAllRecipes() async throws -> [Recipe] {
-        return try await api.getRecipes()
-    }
 
     func searchRecipes(_ recipeSearch: RecipeSearch) async throws -> [Recipe] {
         let recipes = try await api.getRecipes()
