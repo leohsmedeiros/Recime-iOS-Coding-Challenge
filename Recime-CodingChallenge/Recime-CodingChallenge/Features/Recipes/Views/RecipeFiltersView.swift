@@ -5,44 +5,71 @@
 //  Created by Leonardo Medeiros on 25/03/26.
 //
 
-
 import SwiftUI
 
 struct RecipeFiltersView: View {
     @Binding var filters: RecipeSearch
     @Environment(\.dismiss) private var dismiss
-    
+
     @State private var vegetarianOnly: Bool = false
     @State private var includedText = ""
     @State private var excludedText = ""
     @State private var servingsText = ""
     @State private var instructionQuery = ""
-    
+
     var body: some View {
         NavigationStack {
-            Form {
-                Section("Dietary") {
-                    Toggle("Vegetarian only", isOn: $vegetarianOnly)
+            ScrollView {
+                VStack(alignment: .leading, spacing: AppSpacing.s8) {
+
+                    // MARK: Dietary
+                    filterSection("Dietary") {
+                        SelectionChip(
+                            title: "Vegetarian",
+                            isSelected: vegetarianOnly
+                        ) {
+                            vegetarianOnly.toggle()
+                        }
+                    }
+
+                    // MARK: Servings
+                    filterSection("Servings") {
+                        FloatingLabelTextField(
+                            label: "Number of servings",
+                            text: $servingsText,
+                            keyboardType: .numberPad
+                        )
+                    }
+
+                    // MARK: Ingredients
+                    filterSection("Include Ingredients") {
+                        FloatingLabelTextField(
+                            label: "e.g. tomato, basil",
+                            text: $includedText
+                        )
+                    }
+
+                    filterSection("Exclude Ingredients") {
+                        FloatingLabelTextField(
+                            label: "e.g. garlic, onion",
+                            text: $excludedText
+                        )
+                    }
+
+                    // MARK: Instructions
+                    filterSection("Instruction Search") {
+                        FloatingLabelTextField(
+                            label: "e.g. bake, simmer",
+                            text: $instructionQuery
+                        )
+                    }
                 }
-                
-                Section("Servings") {
-                    TextField("e.g. 2", text: $servingsText)
-                        .keyboardType(.numberPad)
-                }
-                
-                Section("Include ingredients") {
-                    TextField("e.g. tomato, basil", text: $includedText)
-                }
-                
-                Section("Exclude ingredients") {
-                    TextField("e.g. garlic, onion", text: $excludedText)
-                }
-                
-                Section("Instruction search") {
-                    TextField("e.g. bake, simmer", text: $instructionQuery)
-                }
+                .padding(.horizontal, AppSpacing.s10)
+                .padding(.vertical, AppSpacing.s8)
             }
+            .background(Color.App.surfaceContainerLow)
             .navigationTitle("Filters")
+            .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     Button("Reset") {
@@ -53,10 +80,11 @@ struct RecipeFiltersView: View {
                         servingsText = ""
                         instructionQuery = ""
                     }
+                    .buttonStyle(.appTertiary)
                 }
-                
+
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button("Done") {
+                    Button("Apply") {
                         filters = RecipeSearch(
                             query: filters.query,
                             vegetarianOnly: vegetarianOnly,
@@ -65,9 +93,9 @@ struct RecipeFiltersView: View {
                             excludedIngredients: parseCommaSeparatedValues(excludedText),
                             instructionQuery: instructionQuery
                         )
-                        
                         dismiss()
                     }
+                    .buttonStyle(.appPrimary)
                 }
             }
             .onAppear {
@@ -81,7 +109,21 @@ struct RecipeFiltersView: View {
             }
         }
     }
-        
+
+    // MARK: - Helpers
+
+    @ViewBuilder
+    private func filterSection<Content: View>(
+        _ title: String,
+        @ViewBuilder content: () -> Content
+    ) -> some View {
+        VStack(alignment: .leading, spacing: AppSpacing.md) {
+            Text(title)
+                .eyebrowStyle()
+            content()
+        }
+    }
+
     private func parseCommaSeparatedValues(_ value: String) -> [String] {
         value
             .split(separator: ",")
@@ -90,14 +132,9 @@ struct RecipeFiltersView: View {
     }
 }
 
-#Preview("Empty Filters") {
-    PreviewEmptyContainer()
-}
+// MARK: - Preview
 
-private struct PreviewEmptyContainer: View {
-    @State var filters = RecipeSearch()
-    
-    var body: some View {
-        RecipeFiltersView(filters: $filters)
-    }
+#Preview("Filters") {
+    @Previewable @State var filters = RecipeSearch()
+    RecipeFiltersView(filters: $filters)
 }

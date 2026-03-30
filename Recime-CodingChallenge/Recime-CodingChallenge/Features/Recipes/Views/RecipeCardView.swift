@@ -5,39 +5,72 @@
 //  Created by Leonardo Medeiros on 25/03/26.
 //
 
-
 import SwiftUI
 
 struct RecipeCardView: View {
     let recipe: Recipe
 
+    private var heroGradient: LinearGradient {
+        LinearGradient(
+            colors: [Color.App.primaryContainer, Color.App.primary],
+            startPoint: .topLeading,
+            endPoint: .bottomTrailing
+        )
+    }
+
     var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Text(recipe.title)
-                .font(.headline)
+        VStack(alignment: .leading, spacing: 0) {
 
-            Text(recipe.description)
-                .font(.subheadline)
-                .foregroundStyle(.secondary)
-                .lineLimit(2)
+            // MARK: Hero — dietary badges float over the gradient
+            ZStack(alignment: .bottomLeading) {
+                heroGradient
+                    .frame(height: 140)
 
-            HStack {
-                ForEach(recipe.dietaryAttributes, id: \.rawValue) {
-                    Text($0.displayName)
-                        .font(.caption)
-                        .padding(4)
-                        .background(.green.opacity(0.3))
-                        .clipShape(Capsule())
+                if !recipe.dietaryAttributes.isEmpty {
+                    HStack(spacing: AppSpacing.xs) {
+                        ForEach(recipe.dietaryAttributes, id: \.self) { attr in
+                            Text(attr.displayName)
+                                .eyebrowStyle()
+                                .foregroundStyle(Color.App.primaryFixedDim)
+                        }
+                    }
+                    .padding(.horizontal, AppSpacing.lg)
+                    .padding(.bottom, AppSpacing.md)
                 }
             }
 
-            Label("\(recipe.servings)", systemImage: "person.2")
-                .font(.caption)
+            // MARK: Content — spacing-5 separates hero from title
+            VStack(alignment: .leading, spacing: AppSpacing.sm) {
+
+                Label("\(recipe.servings) servings", systemImage: "person.2")
+                    .eyebrowStyle()
+                    .foregroundStyle(Color.App.primaryFixedDim)
+
+                Text(recipe.title)
+                    .font(.App.displaySm)
+                    .foregroundStyle(Color.App.onSurface)
+                    .lineLimit(2)
+
+                Text(recipe.description)
+                    .font(.App.bodySm)
+                    .foregroundStyle(Color.App.onSurfaceVariant)
+                    .lineLimit(2)
+            }
+            .padding(.horizontal, AppSpacing.lg)
+            .padding(.top, AppSpacing.s5)
+            .padding(.bottom, AppSpacing.xl)
+            .frame(maxWidth: .infinity, alignment: .leading)
         }
-        .padding(.vertical, 4)
+        .background(Color.App.surfaceContainerLowest)
+        .clipShape(RoundedRectangle(cornerRadius: AppRadius.lg))
+        .ambientShadow()
     }
 }
 
+// MARK: - Preview
+
 #Preview("Recipe Card") {
     RecipeCardView(recipe: .mock)
+        .padding(AppSpacing.lg)
+        .background(Color.App.surface)
 }

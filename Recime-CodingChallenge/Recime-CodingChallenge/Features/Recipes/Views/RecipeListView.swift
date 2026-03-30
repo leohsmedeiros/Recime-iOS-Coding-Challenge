@@ -5,39 +5,54 @@
 //  Created by Leonardo Medeiros on 25/03/26.
 //
 
-
 import SwiftUI
 
 struct RecipeListView: View {
     @State private var viewModel = RecipeListViewModel()
     @State private var recipeSearch = RecipeSearch()
     @State private var showingFilters = false
-    @State private var activeFilterCount = 0
-    
+
+    private var activeFilterCount: Int {
+        viewModel.computeActiveFilterCount(search: recipeSearch)
+    }
+
     var body: some View {
         NavigationStack {
-            Group {
-                if viewModel.isLoading {
-                    ProgressView("Loading recipes...")
-                } else if let errorMessage = viewModel.errorMessage {
-                    ContentUnavailableView(
-                        "Something went wrong",
-                        systemImage: "exclamationmark.triangle",
-                        description: Text(errorMessage)
-                    )
-                } else if viewModel.recipes.isEmpty {
-                    ContentUnavailableView(
-                        "No Recipes Found",
-                        systemImage: "magnifyingglass",
-                        description: Text("Try adjusting your search or filters.")
-                    )
-                } else {
-                    List(viewModel.recipes) { recipe in
-                        NavigationLink(value: recipe) {
-                            RecipeCardView(recipe: recipe)
+            ZStack {
+                Color.App.surface.ignoresSafeArea()
+
+                Group {
+                    if viewModel.isLoading {
+                        ProgressView()
+                            .tint(Color.App.primary)
+                    } else if let errorMessage = viewModel.errorMessage {
+                        ContentUnavailableView(
+                            "Something went wrong",
+                            systemImage: "exclamationmark.triangle",
+                            description: Text(errorMessage)
+                                .font(.App.bodySm)
+                        )
+                    } else if viewModel.recipes.isEmpty {
+                        ContentUnavailableView(
+                            "No Recipes Found",
+                            systemImage: "magnifyingglass",
+                            description: Text("Try adjusting your search or filters.")
+                                .font(.App.bodySm)
+                        )
+                    } else {
+                        ScrollView {
+                            LazyVStack(spacing: AppSpacing.md) {
+                                ForEach(viewModel.recipes) { recipe in
+                                    NavigationLink(value: recipe) {
+                                        RecipeCardView(recipe: recipe)
+                                    }
+                                    .buttonStyle(.plain)
+                                }
+                            }
+                            .padding(.horizontal, AppSpacing.lg)
+                            .padding(.vertical, AppSpacing.md)
                         }
                     }
-                    .listStyle(.plain)
                 }
             }
             .navigationTitle("Recipes")
@@ -49,16 +64,17 @@ struct RecipeListView: View {
                     } label: {
                         ZStack(alignment: .topTrailing) {
                             Image(systemName: "line.3.horizontal.decrease")
-                            
+                                .foregroundStyle(Color.App.primary)
+
                             if activeFilterCount > 0 {
                                 Text("\(activeFilterCount)")
-                                    .font(.caption2)
+                                    .font(.App.labelSm)
                                     .bold()
-                                    .foregroundStyle(.white)
-                                    .padding(8)
-                                    .background(Color.red)
+                                    .foregroundStyle(Color.App.onSecondary)
+                                    .padding(5)
+                                    .background(Color.App.secondary)
                                     .clipShape(Circle())
-                                    .offset(x: 6, y: 6)
+                                    .offset(x: 8, y: -8)
                             }
                         }
                     }
@@ -71,12 +87,13 @@ struct RecipeListView: View {
                 RecipeDetailView(recipe: recipe)
             }
             .task(id: recipeSearch) {
-                activeFilterCount = viewModel.computeActiveFilterCount(search: recipeSearch)
                 await viewModel.loadRecipes(search: recipeSearch)
             }
         }
     }
 }
+
+// MARK: - Preview
 
 #Preview("Recipe List") {
     RecipeListView()
