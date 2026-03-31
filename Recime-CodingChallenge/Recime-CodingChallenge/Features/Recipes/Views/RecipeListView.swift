@@ -92,7 +92,15 @@ struct RecipeListView: View {
                 RecipeDetailView(recipe: recipe)
             }
             .task(id: recipeSearch) {
-                await viewModel.loadRecipes(search: recipeSearch)
+                do {
+                    try await Task.sleep(nanoseconds: 400_000_000)
+
+                    if Task.isCancelled { return }
+
+                    await viewModel.loadRecipes(search: recipeSearch)
+                } catch {
+                    // ignore cancellation errors
+                }
             }
         }
     }
