@@ -55,8 +55,7 @@ struct RecipeListView: View {
                     }
                 }
             }
-            .navigationTitle("Recipes")
-            .searchable(text: $recipeSearch.query, prompt: "Search recipes")
+            .searchable(text: $recipeSearch.query, placement: .navigationBarDrawer, prompt: "Search recipes")
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
@@ -78,6 +77,7 @@ struct RecipeListView: View {
                             }
                         }
                     }
+                    .padding(5)
                 }
             }
             .sheet(isPresented: $showingFilters) {

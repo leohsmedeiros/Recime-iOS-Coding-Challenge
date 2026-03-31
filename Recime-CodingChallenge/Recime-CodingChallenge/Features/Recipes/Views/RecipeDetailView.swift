@@ -49,10 +49,10 @@ struct RecipeDetailView: View {
                     .background(Color.App.surfaceContainerLowest)
                     .clipShape(
                         UnevenRoundedRectangle(
-                            topLeadingRadius: AppRadius.lg,
+                            topLeadingRadius: AppRadius.md,
                             bottomLeadingRadius: 0,
                             bottomTrailingRadius: 0,
-                            topTrailingRadius: AppRadius.lg
+                            topTrailingRadius: AppRadius.md
                         )
                     )
                     .offset(y: -AppRadius.xl)
@@ -68,7 +68,7 @@ struct RecipeDetailView: View {
 
     @ViewBuilder
     private var contentSheet: some View {
-        VStack(alignment: .leading, spacing: AppSpacing.s10) {
+        VStack(alignment: .leading, spacing: AppSpacing.s5) {
 
             Text(recipe.description)
                 .font(.App.bodyLg)
@@ -108,7 +108,7 @@ struct RecipeDetailView: View {
 
                             Spacer()
                         }
-                        .padding(.vertical, AppSpacing.sm)
+                        .padding(.vertical, AppSpacing.xs)
                     }
                 }
                 .clipShape(RoundedRectangle(cornerRadius: AppRadius.md))
@@ -120,7 +120,7 @@ struct RecipeDetailView: View {
 
                 VStack(alignment: .leading, spacing: AppSpacing.lg) {
                     ForEach(Array(recipe.instructions.enumerated()), id: \.offset) { index, step in
-                        HStack(alignment: .top, spacing: AppSpacing.md) {
+                        HStack(alignment: .center, spacing: AppSpacing.xs) {
                             Text("\(index + 1)")
                                 .font(.App.labelMd)
                                 .foregroundStyle(Color.App.onSecondaryContainer)
