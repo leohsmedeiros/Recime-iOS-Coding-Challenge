@@ -61,10 +61,10 @@ struct RecipeCardView: View {
             .padding(.horizontal, AppSpacing.lg)
             .padding(.top, AppSpacing.s5)
             .padding(.bottom, AppSpacing.xl)
-            .frame(maxWidth: .infinity, alignment: .leading)
+            .frame(maxWidth: .infinity, minHeight: 180, alignment: .topLeading)
         }
         .background(Color.App.surfaceContainerLowest)
-        .clipShape(RoundedRectangle(cornerRadius: AppRadius.lg))
+        .clipShape(RoundedRectangle(cornerRadius: AppRadius.md))
         .ambientShadow()
     }
 }

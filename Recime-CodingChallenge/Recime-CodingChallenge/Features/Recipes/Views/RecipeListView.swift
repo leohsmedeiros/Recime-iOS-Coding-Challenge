@@ -11,7 +11,12 @@ struct RecipeListView: View {
     @State private var viewModel = RecipeListViewModel()
     @State private var recipeSearch = RecipeSearch()
     @State private var showingFilters = false
-
+    
+    private let columns = [
+        GridItem(.flexible(), spacing: 16),
+        GridItem(.flexible(), spacing: 16)
+    ]
+    
     private var activeFilterCount: Int {
         viewModel.computeActiveFilterCount(search: recipeSearch)
     }
@@ -41,7 +46,7 @@ struct RecipeListView: View {
                         )
                     } else {
                         ScrollView {
-                            LazyVStack(spacing: AppSpacing.md) {
+                            LazyVGrid(columns: columns, spacing: AppSpacing.md) {
                                 ForEach(viewModel.recipes) { recipe in
                                     NavigationLink(value: recipe) {
                                         RecipeCardView(recipe: recipe)
